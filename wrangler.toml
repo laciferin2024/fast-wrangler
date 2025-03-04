@@ -3,5 +3,17 @@ main = "src/worker.py"
 compatibility_flags = ["python_workers"]
 compatibility_date = "2023-12-18"
 
+[observability]
+enabled = true
+
 [vars]
 MESSAGE = "This is an environment variable"
+
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fast-wrangler"
+database_id = "f29a9a9d-c31b-4d30-aed3-98d6e0490607"

@@ -23,6 +23,17 @@ async def env(req: Request):
         "message": "Here is an example of getting an environment variable: "
         + env.MESSAGE
     }
+@app.get("/query")
+async def query(req: Request):
+    env = req.scope["env"]
+    query = """select 1"""
+    results = await env.DB.prepare(query).all()
+    # data = results.results[0] 
+    return {
+        "query": query,
+        "results": results,
+        # "data": data,
+    }
 
 
 class Item(BaseModel):
