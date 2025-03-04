@@ -15,3 +15,7 @@ dev:
 
 w *ARGS:
  wrangler {{ARGS}}
+
+
+deps:
+  uv pip freeze > requirements.txt
