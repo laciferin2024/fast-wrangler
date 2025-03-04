@@ -1,10 +1,17 @@
+import json
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
 
 async def on_fetch(request, env):
     import asgi
-
+    
+    query = """select 1"""
+    results = await env.DB.prepare(query).all()
+    data = results.results[0] 
+    
+    # raise ValueError(data)
+    
     return await asgi.fetch(app, request, env)
 
 
@@ -26,13 +33,21 @@ async def env(req: Request):
 @app.get("/query")
 async def query(req: Request):
     env = req.scope["env"]
+    # print(env.DB)
     query = """select 1"""
+    query= """
+     SELECT x 
+        FROM test
+        ORDER BY RANDOM()
+        LIMIT 1;
+    """
     results = await env.DB.prepare(query).all()
-    # data = results.results[0] 
+    data = results.results        
     return {
         "query": query,
-        "results": results,
-        # "data": data,
+        # "results": json.dumps(results),
+        # "results": results,
+        "data": data,
     }
 
 

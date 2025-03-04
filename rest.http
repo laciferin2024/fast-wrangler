@@ -5,9 +5,16 @@ transfer-encoding: chunked
 content-type: application/json
 content-encoding: gzip
 ###
+GET {{u}}/env
+
+HTTP/1.1 200  - OK
+transfer-encoding: chunked
+content-type: application/json
+content-encoding: gzip
+###
 GET {{u}}/query
 
-HTTP/1.1 500  - Internal Server Error
+HTTP/1.1 200  - OK
 transfer-encoding: chunked
-content-type: text/plain;charset=UTF-8
+content-type: application/json
 content-encoding: gzip
