@@ -6,12 +6,6 @@ from pydantic import BaseModel
 async def on_fetch(request, env):
     import asgi
     
-    query = """select 1"""
-    results = await env.DB.prepare(query).all()
-    data = results.results[0] 
-    
-    # raise ValueError(data)
-    
     return await asgi.fetch(app, request, env)
 
 
@@ -33,8 +27,9 @@ async def env(req: Request):
 @app.get("/query")
 async def query(req: Request):
     env = req.scope["env"]
-    # print(env.DB)
-    query = """select 1"""
+    query = """select 1""" #doesn't work
+    query = "create table if not exists test (x integer)"
+    query = "insert into test (x) values (1)"
     query= """
      SELECT x 
         FROM test
